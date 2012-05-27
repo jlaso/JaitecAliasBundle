@@ -89,7 +89,7 @@ class MainGenerator implements AliasGeneratorInterface
         $ret = '';
         $aux = $id;
         $bit = 0;
-        while($maxdigits>=$bit){
+        while($maxdigits>$bit){
             $a = $aux % $this->n;
             $ret .= substr($this->base[$bit % $this->l],$a,1);
             $aux = ($aux-$a)/$this->n;
