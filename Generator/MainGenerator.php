@@ -117,4 +117,26 @@ class MainGenerator implements AliasGeneratorInterface
         return $id;
     }
 
+    /**
+     * calculats the last alias can be formed with n-digits
+     * @param integer $maxdigits
+     * @return string 
+     */
+    public function maxAlias($maxdigits=8){
+        $alias = '';
+        for ($bit=0;$bit<$maxdigits;$bit++){
+            $alias .= substr($this->base[$bit % $this->l],-1);
+        }
+        return $alias;
+    }
+    
+    /**
+     * calculates the id that applies for the last alias can be formed
+     * @param integer $maxdigits
+     * @return integer
+     */
+    public function maxId($maxdigits=8){
+        $alias = $this->maxAlias($maxdigits);
+        return $this->decode($alias);
+    }
 }
