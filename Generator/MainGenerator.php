@@ -86,6 +86,8 @@ class MainGenerator implements AliasGeneratorInterface
      * @return string 
      */
     public function encode($id, $maxdigits = 8){
+        if($id>$max = $this->maxId($maxdigits))
+            throw new Exception("Limit id($id) for $maxdigit digits($max) in JaitecAlias->encode, possible lost of information");
         $ret = '';
         $aux = $id;
         $bit = 0;
