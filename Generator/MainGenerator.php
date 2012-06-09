@@ -47,7 +47,10 @@ class MainGenerator implements AliasGeneratorInterface
     private $n = 0;
     
     // this holds number of cycling bases for each n-digit
-    private $l = 0;  
+    private $l = 0; 
+    
+    // convention for last parameter encode function
+    const GROWS = true;
     
     /**
      * Checks if the base array is ok, and if not throws exception indicating this
@@ -88,15 +91,16 @@ class MainGenerator implements AliasGeneratorInterface
      * encodes numeric id in n-based version
      * @param integer $id
      * @param byte $maxdigits
+     * @param boolean $grows
      * @return string 
      */
-    public function encode($id, $maxdigits = 8){
-        if($id>$max = $this->maxId($maxdigits))
-            throw new \Exception("Limit id($id) for $maxdigit digits($max) in JaitecAlias->encode, possible lost of information");
+    public function encode($id, $maxdigits = 8, $grows = false){
+        if(!$grows && $id>$max = $this->maxId($maxdigits))
+            throw new \Exception("Limit id($id) for $maxdigit digits($max) in JaitecAliasBundle->encode, possible lost of information");
         $ret = '';
         $aux = $id;
         $bit = 0;
-        while($maxdigits>$bit){
+        while(($grows && $aux) || $maxdigits>$bit){
             $a = $aux % $this->n;
             $ret .= substr($this->base[$bit % $this->l],$a,1);
             $aux = ($aux-$a)/$this->n;
