@@ -14,6 +14,14 @@ Add AliasBundle to your vendor/bundles/ dir
 
     $ git submodule add git://github.com/jlaso/JaitecAliasBundle.git vendor/bundles/Jaitec/AliasBundle
 
+or add this to deps
+
+[JaitecAliasBundle]    
+    git=http://github.com/jlaso/JaitecAliasBundle
+    target=/bundles/Jaitec/AliasBundle
+
+and run php bin/vendors install
+
 Add the Jaitec namespace to your autoloader
 -------------------------------------------
 
