@@ -143,7 +143,6 @@ class MainGenerator implements AliasGeneratorInterface
      * @return integer
      */
     public function maxId($maxdigits=8){
-        $alias = $this->maxAlias($maxdigits);
-        return $this->decode($alias);
+        return pow($this->n, $digits);
     }
 }
