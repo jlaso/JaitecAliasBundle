@@ -2,4 +2,4 @@
 services:
     jaitec_alias.main:
         class:        Jaitec\AliasBundle\Generator\MainGenerator
-        
+        arguments:    [@kernel]   

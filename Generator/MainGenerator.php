@@ -52,7 +52,12 @@ class MainGenerator implements AliasGeneratorInterface
     /**
      * Checks if the base array is ok, and if not throws exception indicating this
      */
-    function __construct() {
+    function __construct($kernel) {
+        // first gets the base array from config, if any
+        $digits = $kernel->getContainer()->getParameter('jaitec_alias');
+        if ($digits)
+            $this->base = $digits;
+        
         $this->l = count($this->base);
         // check now if array base is correctly formed, i.e. same lenght for
         // all elements and  non-repeated chars
