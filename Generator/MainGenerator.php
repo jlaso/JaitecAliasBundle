@@ -60,7 +60,7 @@ class MainGenerator implements AliasGeneratorInterface
             $aux = strlen($this->base[$i]);
             if($this->n){  // now check same sized elements
                 if($aux<>$this->n)
-                    throw new Exception("Not same sized for element 0 and ".$i);
+                    throw new \Exception("Not same sized for element 0 and ".$i);
             }else
                 $this->n = $aux;
         }
@@ -72,7 +72,7 @@ class MainGenerator implements AliasGeneratorInterface
                 $c = substr($this->base[$i], $j, 1);
                 if(strpos($yet, $c)) {
                     $decored = str_replace($c, " ->$c<- ", $this->base[$i]);
-                    throw new Exception("Element $i has element ($c) repeated, ||$decored||");
+                    throw new \Exception("Element $i has element ($c) repeated, ||$decored||");
                 }
                 $yet .= $c;
             }
@@ -87,7 +87,7 @@ class MainGenerator implements AliasGeneratorInterface
      */
     public function encode($id, $maxdigits = 8){
         if($id>$max = $this->maxId($maxdigits))
-            throw new Exception("Limit id($id) for $maxdigit digits($max) in JaitecAlias->encode, possible lost of information");
+            throw new \Exception("Limit id($id) for $maxdigit digits($max) in JaitecAlias->encode, possible lost of information");
         $ret = '';
         $aux = $id;
         $bit = 0;
