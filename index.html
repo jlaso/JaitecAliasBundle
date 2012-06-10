@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jaitecaliasbundle by jlaso</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jaitecaliasbundle</h1>
+        <p>Pseudo-random alias generator bundle</p>
+        <p class="view"><a href="https://github.com/jlaso/JaitecAliasBundle">View the Project on GitHub <small>jlaso/JaitecAliasBundle</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jlaso/JaitecAliasBundle/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jlaso/JaitecAliasBundle/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jlaso/JaitecAliasBundle">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>JaitecAliasBundle</h1>
+
+<p>This bundle provides helpers to generate pseudo-random alias.</p>
+
+<h1>Installation</h1>
+
+<h2>Add AliasBundle to your vendor/bundles/ dir</h2>
+
+<p>::</p>
+
+<pre><code>$ git submodule add git://github.com/jlaso/JaitecAliasBundle.git vendor/bundles/Jaitec/AliasBundle
+</code></pre>
+
+<p>or add this to deps</p>
+
+<pre><code>[JaitecAliasBundle]    
+    git=http://github.com/jlaso/JaitecAliasBundle
+    target=/bundles/Jaitec/AliasBundle
+</code></pre>
+
+<p>and run </p>
+
+<pre><code>$ php bin/vendors install
+</code></pre>
+
+<h2>Add the Jaitec namespace to your autoloader</h2>
+
+<p>::</p>
+
+<pre><code>// app/autoload.php
+$loader-&gt;registerNamespaces(array(
+    'Jaitec' =&gt; __DIR__.'/../vendor/bundles',
+    // your other namespaces
+);
+</code></pre>
+
+<h2>Add AliasBundle to your application kernel</h2>
+
+<p>::</p>
+
+<pre><code>// app/AppKernel.php
+
+public function registerBundles()
+{
+    return array(
+        // ...
+        new Jaitec\AliasBundle\JaitecAliasBundle(),
+        // ...
+    );
+}
+</code></pre>
+
+<h1>Usage</h1>
+
+<p>AliasBundle provides this service to generate pseudo-random alias :</p>
+
+<ul>
+<li>
+<code>jaitec_alias.main</code> implements <code>AliasGeneratorInterface</code>
+</li>
+</ul><p>Instead of those specialized services, you can also inject <code>jaitec_alias.main</code>,
+which provides shortcuts to all of the other services and allow you to only
+inject a single dependancy.</p>
+
+<h1>Sample</h1>
+
+<p>For example generating alias for an url based on row ID in mysql table</p>
+
+<p>First get the object throught dependency inject</p>
+
+<pre><code>$this-&gt;alias = $this-&gt;container-&gt;get('jaitec_alias.main');
+</code></pre>
+
+<p>Now generate the alias</p>
+
+<pre><code>$alias = $this-&gt;alias-&gt;encode($record-&gt;getId(),4);
+</code></pre>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/jlaso">jlaso</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
