@@ -3,6 +3,7 @@ JaitecAliasBundle
 
 This bundle provides helpers to generate pseudo-random alias.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/653a48f1-26eb-430e-96c2-4b079ad6e54d/big.png)](https://insight.sensiolabs.com/projects/653a48f1-26eb-430e-96c2-4b079ad6e54d)
 
 Installation
 ============
@@ -77,8 +78,3 @@ First get the object throught dependency inject
 Now generate the alias
 
     $alias = $this->alias->encode($record->getId(),4);
-
-
-        
-
-        
