@@ -1,25 +1,7 @@
 <?php
 
-/**
- * (c) Joseluis Laso <wld1373@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- * 
- * The functionallity of this class is to have a method that obtain 
- * pseudo-random id width a seed, normally same id,
- * It generates the base-n id, throught key-cycling process with
- * simulates randomly generated, the advantage of this process is
- * that is reversible and can obtaind primary id with decode
- * principally thinked for aliases in slugs or urls, not for passwords(can decode)
- *
- * the codification is in an inusual format, the first digit is low significant digit.
- * for this reason this code is expandable, most significant digits are added by right
- * 
- */
 
 namespace Jaitec\AliasBundle\Generator;
-
 
 class MainGenerator implements AliasGeneratorInterface
 {
@@ -55,12 +37,15 @@ class MainGenerator implements AliasGeneratorInterface
     /**
      * Checks if the base array is ok, and if not throws exception indicating this
      */
-    function __construct($kernel) {
-        // first gets the base array from config, if any
-        $digits = $kernel->getContainer()->getParameter('jaitec_alias');
-        if ($digits)
-            $this->base = $digits;
-        
+    function __construct($kernel = null) {
+        if ($kernel) {
+            // first gets the base array from config, if any
+            $digits = $kernel->getContainer()->getParameter('jaitec_alias');
+            if ($digits) {
+                $this->base = $digits;
+            }
+        }
+
         $this->l = count($this->base);
         // check now if array base is correctly formed, i.e. same lenght for
         // all elements and  non-repeated chars
@@ -86,17 +71,18 @@ class MainGenerator implements AliasGeneratorInterface
             }
         }
     }
-    
+
     /**
      * encodes numeric id in n-based version
      * @param integer $id
-     * @param byte $maxdigits
+     * @param integer $maxdigits
      * @param boolean $grows
-     * @return string 
+     * @return string
+     * @throws \Exception
      */
     public function encode($id, $maxdigits = 8, $grows = false){
         if(!$grows && $id>$max = $this->maxId($maxdigits))
-            throw new \Exception("Limit id($id) for $maxdigit digits($max) in JaitecAliasBundle->encode, possible lost of information");
+            throw new \Exception("Limit id($id) for $maxdigits digits($max) in JaitecAliasBundle->encode, possible lost of information");
         $ret = '';
         $aux = $id;
         $bit = 0;
@@ -111,7 +97,7 @@ class MainGenerator implements AliasGeneratorInterface
     
     /**
      * decodes an alias obtained previously with encode and returns the id that originates this alias
-     * @param strig $alias
+     * @param string $alias
      * @return integer 
      */
     public function decode($alias){
