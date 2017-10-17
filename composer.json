@@ -1,0 +1,15 @@
+{
+    "name": "jlaso/jaitec-alias",
+    "description": "A simple alias generator",
+    "keywords": [ "id", "jaitec" ],
+    "homepage": "https://github.com/jlaso/JaitecAliasBundle",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joseluis Laso",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev"
+}
